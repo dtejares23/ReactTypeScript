@@ -1,5 +1,6 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
 import * as dotenv from "dotenv"
+import { Note } from "../model/Note";
 dotenv.config()
 
 class Database {
@@ -22,11 +23,11 @@ class Database {
             password: this.POSTGRES_PASSWORD,
             host: this.POSTGRES_HOST,
             port: this.POSTGRES_PORT,
-            dialect: "postgres"
+            dialect: "postgres",
+            models: [Note]
         });
-
         this.sequelize.authenticate().then(() =>{
-            console.log("Ze belutooth is kownected sucksessfowley. PostgresSQL COnnection has been establish successfully. ")
+            console.log("Ze belutooth is kownected sucksessfowley. PostgresSQL Connection has been establish successfully. ")
         })
         .catch((err=>{
             console.log("Unable to connect to the PostgreSQL database", "n/", err)
