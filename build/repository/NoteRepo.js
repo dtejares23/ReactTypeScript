@@ -34,31 +34,62 @@ class NoteRepo {
                     },
                 });
                 if (!new_note) {
-                    throw new Error("You FAILED to create note!");
+                    throw new Error("You FAILED to UPDATE note!");
                 }
+                new_note.name = note.name;
+                new_note.description = note.description;
+                yield new_note.save();
             }
             catch (err) {
                 throw new Error("Method not implemented");
             }
         });
     }
-    delete(note) {
-        try {
-        }
-        catch (_a) {
-        }
+    delete(noteId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const new_note = yield Note_1.Note.findOne({
+                    where: {
+                        id: noteId,
+                    },
+                });
+                if (!noteId) {
+                    throw new Error("Note not found!");
+                }
+                yield new_note.destroy();
+            }
+            catch (_a) {
+                throw new Error("Failed to delete note!");
+            }
+        });
     }
     retrieveById(noteId) {
-        try {
-        }
-        catch (_a) {
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const new_note = yield Note_1.Note.findOne({
+                    where: {
+                        id: noteId,
+                    },
+                });
+                if (!noteId) {
+                    throw new Error("Note not found!");
+                }
+                return new_note;
+            }
+            catch (_a) {
+                throw new Error("Failed to retrieve note!");
+            }
+        });
     }
     retrieveAll() {
-        try {
-        }
-        catch (_a) {
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Note_1.Note.findAll();
+            }
+            catch (_a) {
+                throw new Error("Failed to retrieve ALL note!");
+            }
+        });
     }
 }
 exports.NoteRepo = NoteRepo;
