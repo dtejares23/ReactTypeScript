@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NoteRepo = void 0;
-const Note_1 = require("../src/model/Note");
+const Note_1 = require("../model/Note");
 class NoteRepo {
     save(note) {
         return __awaiter(this, void 0, void 0, function* () {

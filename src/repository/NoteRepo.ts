@@ -1,4 +1,4 @@
-import { Note } from "../src/model/Note";
+import { Note } from "../model/Note";
 
 interface INoteRepo {
     save(note: Note): Promise<void>;
@@ -16,7 +16,7 @@ export class NoteRepo implements INoteRepo {
                 description: note.description
             })
         }
-        catch(err) {
+        catch (err) {
             throw new Error("Method not implemented");
         }
     }
@@ -27,7 +27,7 @@ export class NoteRepo implements INoteRepo {
                     id: note.id,
                 },
             });
-            if(!new_note) {
+            if (!new_note) {
                 throw new Error("You FAILED to UPDATE note!")
             }
             new_note.name = note.name;
@@ -35,18 +35,18 @@ export class NoteRepo implements INoteRepo {
 
             await new_note.save();
         }
-        catch(err) {
+        catch (err) {
             throw new Error("Method not implemented");
         }
     }
     async delete(noteId: number): Promise<void> {
         try {
             const new_note = await Note.findOne({
-                where:{
+                where: {
                     id: noteId,
                 },
             });
-            if(!noteId) {
+            if (!noteId) {
                 throw new Error("Note not found!")
             }
             await new_note.destroy();
@@ -58,11 +58,11 @@ export class NoteRepo implements INoteRepo {
     async retrieveById(noteId: number): Promise<Note> {
         try {
             const new_note = await Note.findOne({
-                where:{
+                where: {
                     id: noteId,
                 },
             });
-            if(!noteId) {
+            if (!noteId) {
                 throw new Error("Note not found!")
             }
             return new_note;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { Note } from "../src/model/Note";
+import { Note } from "../model/Note";
 import { NoteRepo } from "../repository/NoteRepo";
 
 class NoteController {
@@ -39,7 +39,7 @@ class NoteController {
             });
         }
     }
-    async update(req: Request, res: Response) { 
+    async update(req: Request, res: Response) {
         try {
             let id = parseInt(req.params["id"])
             const new_note = new Note();
@@ -55,7 +55,7 @@ class NoteController {
                 message: "Successfuly UPDATED note Id: " + id
             })
         }
-        catch(err) {
+        catch (err) {
             res.status(500).json({
                 status: "Internal server error!",
                 message: "Internal Server Error"
@@ -85,15 +85,15 @@ class NoteController {
             let id = parseInt(req.params["id"])
             const new_note = await new NoteRepo().retrieveById(id)
             res.status(200).json({
-                status:"Oks na to",
-                message:"Successfully fetched note by id: " + id,
+                status: "Oks na to",
+                message: "Successfully fetched note by id: " + id,
                 data: new_note
             })
         }
         catch (err) {
             res.status(200).json({
                 status: "Internal Server Error!",
-                message:"Internal Server Error!"
+                message: "Internal Server Error!"
             })
         }
     }
