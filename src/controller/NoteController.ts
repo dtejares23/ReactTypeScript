@@ -23,7 +23,7 @@ class NoteController {
             });
         }
     }
-    async findAll(req: Request, res: Response) {
+    async read(req: Request, res: Response) {
         try {
             const new_note = await new NoteRepo().retrieveAll()
             res.status(200).json({

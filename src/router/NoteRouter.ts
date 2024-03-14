@@ -6,7 +6,7 @@ import validate from "../helper/validate";
 class NoteRoutes extends BaseRoutes {
     public routes(): void {
         this.router.post("", NoteController.create);
-        this.router.get("", NoteController.findAll);
+        this.router.get("", NoteController.read);
         this.router.patch(
             "/:id",
             validate(updateNoteSchema), 
