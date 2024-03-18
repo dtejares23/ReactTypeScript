@@ -15,5 +15,4 @@ class NoteRoutes extends BaseRoutes {
         this.router.get("/:id", NoteController.findById);
     }
 }
-
 export default new NoteRoutes().router;

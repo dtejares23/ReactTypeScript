@@ -33,7 +33,7 @@ class NoteController {
             }
         });
     }
-    findAll(req, res) {
+    read(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const new_note = yield new NoteRepo_1.NoteRepo().retrieveAll();

@@ -14,7 +14,7 @@ class App {
     protected plugins(): void {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
-    } 
+    }
 
     protected databaseSync(): void {
         const db = new Database();
