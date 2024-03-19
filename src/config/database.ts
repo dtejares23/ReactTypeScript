@@ -24,6 +24,12 @@ class Database {
             host: this.POSTGRES_HOST,
             port: this.POSTGRES_PORT,
             dialect: "postgres",
+            dialectOptions: {
+                ssl: {
+                  require: true, // Require SSL/TLS encryption
+                //   rejectUnauthorized: false, // Ignore self-signed certificates (for development/testing purposes)
+                },
+            },
             models: [Note]
         });
         this.sequelize.authenticate().then(() =>{
