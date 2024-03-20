@@ -17,9 +17,8 @@ class App {
         this.app.use(express_1.default.urlencoded({ extended: true }));
     }
     databaseSync() {
-        var _a;
         const db = new database_1.default();
-        (_a = db.sequelize) === null || _a === void 0 ? void 0 : _a.sync();
+        db.sequelize?.sync();
     }
     routes() {
         this.app.route("/").get((req, res) => {
@@ -28,7 +27,7 @@ class App {
         this.app.use("/api/v1/note", NoteRouter_1.default);
     }
 }
-const port = 3000;
+const port = 3001;
 const app = new App().app;
 app.listen(port, () => {
     console.log("✅✅✅ Server started successfully! ✅✅✅");

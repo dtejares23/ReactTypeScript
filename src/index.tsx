@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from "express";
 import Database from "./config/database";
 import NoteRouter from "./router/NoteRouter";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Greetings from "./components/Greetings";
 
 class App {
@@ -28,11 +30,9 @@ class App {
         });
         this.app.use("/api/v1/note", NoteRouter);
     }
-
-    
 }
 
-const port: number = 3000
+const port: number = 3001
 const app = new App().app
 
 app.listen(port, () => {
