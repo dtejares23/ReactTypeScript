@@ -28,7 +28,7 @@ class App {
         this.app.use("/api/v1/note", NoteRouter_1.default);
     }
 }
-const port = 8000;
+const port = 3000;
 const app = new App().app;
 app.listen(port, () => {
     console.log("✅✅✅ Server started successfully! ✅✅✅");

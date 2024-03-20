@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import Database from "./config/database";
 import NoteRouter from "./router/NoteRouter";
+import Greetings from "./components/Greetings";
 
 class App {
     public app: Application;
@@ -27,9 +28,11 @@ class App {
         });
         this.app.use("/api/v1/note", NoteRouter);
     }
+
+    
 }
 
-const port: number = 8000
+const port: number = 3000
 const app = new App().app
 
 app.listen(port, () => {
