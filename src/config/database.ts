@@ -26,8 +26,7 @@ class Database {
             dialect: "postgres",
             dialectOptions: {
                 ssl: {
-                  require: true, // Require SSL/TLS encryption
-                //   rejectUnauthorized: false, // Ignore self-signed certificates (for development/testing purposes)
+                  require: true,
                 },
             },
             models: [Note]
