@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 import { Note } from "../model/Note";
 import { NoteRepo } from "../repository/NoteRepo";
 
@@ -8,17 +8,19 @@ class NoteController {
             const new_note = new Note();
             new_note.name = req.body.name;
             new_note.description = req.body.description;
-
             let noteName = new_note.name
+
             await new NoteRepo().save(new_note)
+
             res.status(200).json({
                 status: "Oks!",
                 message: "You have successfuly created a NOTE: " + noteName + "Congratulations! "
             });
         }
         catch (err) {
+            const err1 = console.log(req.body)
             res.status(500).json({
-                status: "Internal Server Error!",
+                status: `Internal Server Error! ${err1}`,
                 message: "Internal server Error!"
             });
         }
@@ -26,6 +28,7 @@ class NoteController {
     async read(req: Request, res: Response) {
         try {
             const new_note = await new NoteRepo().retrieveAll()
+            console.log(new_note)
             res.status(200).json({
                 status: "Oks!",
                 message: "Successfully fetched ALL note!",
@@ -44,6 +47,10 @@ class NoteController {
             let id = parseInt(req.params["id"])
             const new_note = new Note();
 
+            if (!req.body || !req.body.name || !req.body.description) {
+                throw new Error("Request body is missing required fields");
+            }
+
             new_note.id = id;
             new_note.name = req.body.name;
             new_note.description = req.body.description;
@@ -56,9 +63,11 @@ class NoteController {
             })
         }
         catch (err) {
+            console.log("Update note error:", err);
             res.status(500).json({
-                status: "Internal server error!",
-                message: "Internal Server Error"
+                status: `Internal server error!`,
+                message: "Internal Server Error",
+                error: err.message,
             })
         }
     }

@@ -16,8 +16,9 @@ class NoteController {
             });
         }
         catch (err) {
+            const err1 = console.log(req.body);
             res.status(500).json({
-                status: "Internal Server Error!",
+                status: `Internal Server Error! ${err1}`,
                 message: "Internal server Error!"
             });
         }
@@ -25,6 +26,7 @@ class NoteController {
     async read(req, res) {
         try {
             const new_note = await new NoteRepo_1.NoteRepo().retrieveAll();
+            console.log(new_note);
             res.status(200).json({
                 status: "Oks!",
                 message: "Successfully fetched ALL note!",
@@ -42,6 +44,9 @@ class NoteController {
         try {
             let id = parseInt(req.params["id"]);
             const new_note = new Note_1.Note();
+            if (!req.body || !req.body.name || !req.body.description) {
+                throw new Error("Request body is missing required fields");
+            }
             new_note.id = id;
             new_note.name = req.body.name;
             new_note.description = req.body.description;
@@ -52,9 +57,11 @@ class NoteController {
             });
         }
         catch (err) {
+            console.log("Update note error:", err);
             res.status(500).json({
-                status: "Internal server error!",
-                message: "Internal Server Error"
+                status: `Internal server error!`,
+                message: "Internal Server Error",
+                error: err.message,
             });
         }
     }
