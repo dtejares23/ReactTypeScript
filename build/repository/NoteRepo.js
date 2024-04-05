@@ -28,8 +28,8 @@ class NoteRepo {
             new_note.description = note.description;
             await new_note.save();
         }
-        catch (err) {
-            throw new Error("Method not implemented");
+        catch (error) {
+            throw new Error("Failed to create note!");
         }
     }
     async delete(noteId) {
@@ -39,7 +39,7 @@ class NoteRepo {
                     id: noteId,
                 },
             });
-            if (!noteId) {
+            if (!new_note) {
                 throw new Error("Note not found!");
             }
             await new_note.destroy();
@@ -55,7 +55,7 @@ class NoteRepo {
                     id: noteId,
                 },
             });
-            if (!noteId) {
+            if (!new_note) {
                 throw new Error("Note not found!");
             }
             return new_note;

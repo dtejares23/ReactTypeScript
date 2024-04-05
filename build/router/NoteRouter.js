@@ -4,16 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseRouter_1 = __importDefault(require("./base/BaseRouter"));
-const NoteController_1 = __importDefault(require("../controller/NoteController"));
+const NoteController_1 = require("../controller/NoteController");
+const NoteSchema_1 = require("../schema/NoteSchema");
+const validate_1 = __importDefault(require("../helper/validate"));
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
+const noteController = new NoteController_1.NoteController();
 /**
  * @swagger
  * tags:
  *  name: Notes
  *  description: Operates related to notes
  *
- * /api/v1/note/:
+ * /api/note/:
  *   get:
  *     tags:
  *      - Notes
@@ -29,7 +32,7 @@ const router = express_1.default.Router();
  *               items:
  *                 $ref: '#/components/schemas/Note'
  *
- * /api/v1/note/{id}:
+ * /api/note/{id}:
  *   get:
  *     tags:
  *      - Notes
@@ -81,17 +84,13 @@ const router = express_1.default.Router();
  *       '404':
  *         description: Note not found
  */
-router.get('/api/v1/note', (req, res) => {
-});
 class NoteRoutes extends BaseRouter_1.default {
     routes() {
-        this.router.post("", NoteController_1.default.create);
-        this.router.get("", NoteController_1.default.read);
-        this.router.patch("/:id", 
-        // validate(updateNoteSchema), 
-        NoteController_1.default.update);
-        this.router.delete("/:id", NoteController_1.default.delete);
-        this.router.get("/:id", NoteController_1.default.findById);
+        this.router.post("", (0, validate_1.default)(NoteSchema_1.createNoteSchema), noteController.create);
+        this.router.get("", noteController.read);
+        this.router.patch("/:id", (0, validate_1.default)(NoteSchema_1.updateNoteSchema), noteController.update);
+        this.router.delete("/:id", noteController.delete);
+        this.router.get("/:id", noteController.findById);
     }
 }
 exports.default = new NoteRoutes().router;

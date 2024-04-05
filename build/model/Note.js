@@ -23,21 +23,21 @@ __decorate([
         type: sequelize_typescript_1.DataType.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        field: Note.NOTE_ID
+        field: Note.NOTE_ID,
     }),
     __metadata("design:type", Number)
 ], Note.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(100),
-        field: Note.NOTE_NAME
+        field: Note.NOTE_NAME,
     }),
     __metadata("design:type", String)
 ], Note.prototype, "name", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(255),
-        field: Note.NOTE_DESCRIPTION
+        field: Note.NOTE_DESCRIPTION,
     }),
     __metadata("design:type", String)
 ], Note.prototype, "description", void 0);

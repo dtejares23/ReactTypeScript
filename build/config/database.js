@@ -51,11 +51,11 @@ class Database {
             },
             models: [Note_1.Note]
         });
-        this.sequelize.authenticate().then(() => {
-            console.log("Ze belutooth is kownected sucksessfowley. PostgresSQL Connection has been establish successfully. ");
+        await this.sequelize.authenticate().then(() => {
+            console.log("✅Ze belutooth is kownected sucksessfowley. PostgresSQL Connection has been establish successfully.✅");
         })
             .catch((err => {
-            console.log("Unable to connect to the PostgreSQL database", "n/", err);
+            console.log("❌ Unable to connect to the PostgreSQL database", "n/", err);
         }));
     }
 }

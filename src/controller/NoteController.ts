@@ -1,13 +1,40 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import { Note } from "../model/Note";
 import { NoteRepo } from "../repository/NoteRepo";
 
 class NoteController {
+    async update(req: Request, res: Response) {
+        try {
+            if (!req.body || !req.body.name || !req.body.description) {
+                throw new Error(req.body.name);
+            }
+            let id = parseInt(req.params["id"]);
+            const new_note = new Note();
+            new_note.id = id;
+            new_note.name = req.body.name;
+            new_note.description = req.body.description;
+
+            await new NoteRepo().update(new_note);
+
+            res.status(200).json({
+                status: "Oks",
+                message: `Successfuly UPDATED note Id: ${id}`
+            })
+        }
+        catch (err) {
+            console.error("Update note error:", err);
+            res.status(500).json({
+                status: `Internal server error!`,
+                message: "Internal Server Error",
+            })
+        }
+    }
+
     async create(req: Request, res: Response) {
         try {
             const new_note = new Note();
-            new_note.name = req.body.name;
-            new_note.description = req.body.description;
+            new_note.name = "req.body.noteName";
+            new_note.description = "hey";
             let noteName = new_note.name
 
             await new NoteRepo().save(new_note)
@@ -25,10 +52,11 @@ class NoteController {
             });
         }
     }
+
     async read(req: Request, res: Response) {
         try {
             const new_note = await new NoteRepo().retrieveAll()
-            console.log(new_note)
+            // console.log(new_note)
             res.status(200).json({
                 status: "Oks!",
                 message: "Successfully fetched ALL note!",
@@ -42,35 +70,7 @@ class NoteController {
             });
         }
     }
-    async update(req: Request, res: Response) {
-        try {
-            let id = parseInt(req.params["id"])
-            const new_note = new Note();
 
-            if (!req.body || !req.body.name || !req.body.description) {
-                throw new Error("Request body is missing required fields");
-            }
-
-            new_note.id = id;
-            new_note.name = req.body.name;
-            new_note.description = req.body.description;
-
-            await new NoteRepo().update(new_note)
-
-            res.status(200).json({
-                status: "Oks na",
-                message: "Successfuly UPDATED note Id: " + id
-            })
-        }
-        catch (err) {
-            console.log("Update note error:", err);
-            res.status(500).json({
-                status: `Internal server error!`,
-                message: "Internal Server Error",
-                error: err.message,
-            })
-        }
-    }
     async delete(req: Request, res: Response) {
         try {
 
@@ -89,6 +89,7 @@ class NoteController {
             });
         }
     }
+
     async findById(req: Request, res: Response) {
         try {
             let id = parseInt(req.params["id"])
@@ -113,4 +114,23 @@ class NoteController {
     }
 }
 
-export default new NoteController();
+class SuperHeroesController {
+    async read(req: Request, res: Response) {
+        try {
+            const new_superhero = await new NoteRepo().retrieveAll()
+            res.status(200).json({
+                status: "Oks!",
+                message: "Successfully fetched ALL Super Heroes!",
+                data: new_superhero
+            })
+        }
+        catch (err) {
+            res.status(500).json({
+                status: "ERROR 500 uwi",
+                message: "Internal server Error!"
+            });
+        }
+    }
+}
+
+export { NoteController, SuperHeroesController};

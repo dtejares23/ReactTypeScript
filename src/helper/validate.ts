@@ -12,7 +12,7 @@ const validate =
             })
             return next();
         }
-        catch (err) {
+        catch (err: any) {
             const error_message = JSON.parse(err.message)
             return res.status(400).json({
                 status: "Bad Blood",

@@ -1,17 +1,21 @@
 import BaseRoutes from "./base/BaseRouter";
-import NoteController from "../controller/NoteController"
-import { updateNoteSchema } from "../schema/NoteSchema";
+import { NoteController, SuperHeroesController } from "../controller/NoteController"
+import { createNoteSchema, updateNoteSchema } from "../schema/NoteSchema";
 import validate from "../helper/validate";
 import express, { Request, Response } from 'express';
 
+import { RequestHandler } from 'express';
+
 const router = express.Router();
+const noteController = new NoteController();
+const superHeroController = new SuperHeroesController();
 /**
  * @swagger
  * tags: 
  *  name: Notes
  *  description: Operates related to notes
  * 
- * /api/v1/note/:
+ * /api/note/:
  *   get:
  *     tags: 
  *      - Notes
@@ -27,7 +31,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Note'
  * 
- * /api/v1/note/{id}:
+ * /api/note/{id}:
  *   get:
  *     tags: 
  *      - Notes
@@ -80,23 +84,19 @@ const router = express.Router();
  *         description: Note not found
  */
 
-
-
-router.get('/api/v1/note', (req: Request, res: Response) => {
-
-});
-
-
 class NoteRoutes extends BaseRoutes {
     public routes(): void {
-        this.router.post("", NoteController.create);
-        this.router.get("", NoteController.read);
-        this.router.patch(
-            "/:id",
-            // validate(updateNoteSchema), 
-            NoteController.update);
-        this.router.delete("/:id", NoteController.delete);
-        this.router.get("/:id", NoteController.findById);
+        this.router.post("",validate(createNoteSchema), noteController.create);
+        this.router.get("", noteController.read);
+        this.router.patch("/:id", validate(updateNoteSchema),noteController.update)
+        this.router.delete("/:id", noteController.delete);
+        this.router.get("/:id", noteController.findById);
+    }
+}
+
+class SuperHeroRoutes extends BaseRoutes {
+    public routes(): void {
+        this.router.get("", superHeroController.read);
     }
 }
 export default new NoteRoutes().router;
