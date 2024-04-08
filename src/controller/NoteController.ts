@@ -21,15 +21,14 @@ class NoteController {
                 message: `Successfuly UPDATED note Id: ${id}`
             })
         }
-        catch (err) {
-            console.error("Update note error:", err);
+        catch (error) {
+            console.error("Update note error:", error);
             res.status(500).json({
                 status: `Internal server error!`,
                 message: "Internal Server Error",
             })
         }
     }
-
     async create(req: Request, res: Response) {
         try {
             const new_note = new Note();
@@ -52,7 +51,6 @@ class NoteController {
             });
         }
     }
-
     async read(req: Request, res: Response) {
         try {
             const new_note = await new NoteRepo().retrieveAll()
@@ -114,23 +112,4 @@ class NoteController {
     }
 }
 
-class SuperHeroesController {
-    async read(req: Request, res: Response) {
-        try {
-            const new_superhero = await new NoteRepo().retrieveAll()
-            res.status(200).json({
-                status: "Oks!",
-                message: "Successfully fetched ALL Super Heroes!",
-                data: new_superhero
-            })
-        }
-        catch (err) {
-            res.status(500).json({
-                status: "ERROR 500 uwi",
-                message: "Internal server Error!"
-            });
-        }
-    }
-}
-
-export { NoteController, SuperHeroesController};
+export { NoteController }; 

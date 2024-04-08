@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const database_1 = __importDefault(require("./config/database"));
 const NoteRouter_1 = __importDefault(require("./router/NoteRouter"));
 const swagger_1 = require("./api/middleware/swagger");
+const SuperHeroRouter_1 = __importDefault(require("./router/SuperHeroRouter"));
 const port = 3001;
 class App {
     constructor() {
@@ -31,6 +32,7 @@ class App {
             res.send("Welcome Home Daryl!");
         });
         this.app.use("/api/note", NoteRouter_1.default);
+        this.app.use("/api/superhero", SuperHeroRouter_1.default);
         this.app.use('/swagger', swagger_1.swaggerUi.serve, swagger_1.swaggerUi.setup(swaggerSpec));
         this.app.listen(port, () => {
             console.log("✅ Server started successfully! ✅", "\nLoading...");

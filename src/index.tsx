@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import Database from "./config/database";
 import NoteRouter from "./router/NoteRouter";
 import { swaggerUi, JsonObject, swaggerSpec } from "./api/middleware/swagger"
+import SuperHeroRouter from "./router/SuperHeroRouter";
 
 const port: number = 3001
 
@@ -26,7 +27,7 @@ class App {
             res.send("Welcome Home Daryl!");
         });
         this.app.use("/api/note", NoteRouter);
-        this.app.use("/api/superhero", )
+        this.app.use("/api/superhero", SuperHeroRouter)
         this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
         this.app.listen(port, () => {
             console.log("✅ Server started successfully! ✅", "\nLoading...")

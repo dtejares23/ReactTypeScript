@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SuperHeroesController = exports.NoteController = void 0;
+exports.NoteController = void 0;
 const Note_1 = require("../model/Note");
 const NoteRepo_1 = require("../repository/NoteRepo");
 class NoteController {
@@ -20,8 +20,8 @@ class NoteController {
                 message: `Successfuly UPDATED note Id: ${id}`
             });
         }
-        catch (err) {
-            console.error("Update note error:", err);
+        catch (error) {
+            console.error("Update note error:", error);
             res.status(500).json({
                 status: `Internal server error!`,
                 message: "Internal Server Error",
@@ -105,22 +105,3 @@ class NoteController {
     }
 }
 exports.NoteController = NoteController;
-class SuperHeroesController {
-    async read(req, res) {
-        try {
-            const new_superhero = await new NoteRepo_1.NoteRepo().retrieveAll();
-            res.status(200).json({
-                status: "Oks!",
-                message: "Successfully fetched ALL note!",
-                data: new_superhero
-            });
-        }
-        catch (err) {
-            res.status(500).json({
-                status: "Internal Server Error!",
-                message: "Internal server Error!"
-            });
-        }
-    }
-}
-exports.SuperHeroesController = SuperHeroesController;

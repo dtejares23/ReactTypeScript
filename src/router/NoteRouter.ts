@@ -1,14 +1,11 @@
 import BaseRoutes from "./base/BaseRouter";
-import { NoteController, SuperHeroesController } from "../controller/NoteController"
+import { NoteController } from "../controller/NoteController"
 import { createNoteSchema, updateNoteSchema } from "../schema/NoteSchema";
 import validate from "../helper/validate";
 import express, { Request, Response } from 'express';
 
-import { RequestHandler } from 'express';
-
 const router = express.Router();
 const noteController = new NoteController();
-const superHeroController = new SuperHeroesController();
 /**
  * @swagger
  * tags: 
@@ -94,9 +91,4 @@ class NoteRoutes extends BaseRoutes {
     }
 }
 
-class SuperHeroRoutes extends BaseRoutes {
-    public routes(): void {
-        this.router.get("", superHeroController.read);
-    }
-}
 export default new NoteRoutes().router;

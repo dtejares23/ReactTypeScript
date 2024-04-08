@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from "dotenv"
 import { Note } from "../model/Note";
+import { SuperHero } from "../model/SuperHero";
 dotenv.config()
 
 class Database {
@@ -29,7 +30,7 @@ class Database {
                   require: true,
                 },
             },
-            models: [Note]
+            models: [Note, SuperHero]
         });
         await this.sequelize.authenticate().then(() =>{
             console.log("✅Ze belutooth is kownected sucksessfowley. PostgresSQL Connection has been establish successfully.✅");

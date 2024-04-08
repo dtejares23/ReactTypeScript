@@ -30,6 +30,7 @@ export class NoteRepo implements INoteRepo {
             if (!new_note) {
                 throw new Error("You FAILED to UPDATE note!")
             }
+            
             new_note.name = note.name;
             new_note.description = note.description;
 

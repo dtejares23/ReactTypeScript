@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const dotenv = __importStar(require("dotenv"));
 const Note_1 = require("../model/Note");
+const SuperHero_1 = require("../model/SuperHero");
 dotenv.config();
 class Database {
     constructor() {
@@ -49,7 +50,7 @@ class Database {
                     require: true,
                 },
             },
-            models: [Note_1.Note]
+            models: [Note_1.Note, SuperHero_1.SuperHero]
         });
         await this.sequelize.authenticate().then(() => {
             console.log("✅Ze belutooth is kownected sucksessfowley. PostgresSQL Connection has been establish successfully.✅");
